@@ -90,8 +90,8 @@ public class MainFrame extends JFrame implements ActionListener{
         jPopupMenu2.add(JMI2[0]);
 
         jPopupMenu3 = new JPopupMenu();
-        delete.addActionListener(this);
-        jPopupMenu3.add(delete);
+        delete1.addActionListener(this);
+        jPopupMenu3.add(delete1);
         zip.addActionListener(this);
         jPopupMenu3.add(zip);
         
@@ -132,7 +132,7 @@ public class MainFrame extends JFrame implements ActionListener{
 						    }
                         }
                     }
-                    }
+                }
                 });
                 ScrollShow = new JScrollPane(list);
 		        ShowPanel.add(ScrollShow);
@@ -147,7 +147,7 @@ public class MainFrame extends JFrame implements ActionListener{
         TreeShow.setBounds(5, 5, 185, 520);
         TreePanel.add(TreeShow);
         this.add(TreePanel); 
-
+        }
         public void doubleClick(String choice){
 			choice += "\\";		
 			File file = new File(Curr_URL + choice);
@@ -367,17 +367,5 @@ public class MainFrame extends JFrame implements ActionListener{
 			}
 			Go();
 		}
-
-    
-    
-    
-    
-
-}
-    
-
-   
-
-    
-
+    }
 }
