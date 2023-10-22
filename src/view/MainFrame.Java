@@ -1,5 +1,4 @@
 package view;
-import control.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import controller.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -54,10 +56,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-		JButton goBackButton = new JButton("Go Back");
-        goBackButton.setBounds(10, 10, 100, 30); // Adjust the positioning and size as needed
-        goBackButton.addActionListener(this);
-        this.add(goBackButton);
+		
 	}
 	
 	public void Init(){
@@ -80,7 +79,8 @@ public class MainFrame extends JFrame implements ActionListener{
         JMIs[5] = new JMenuItem("Paste");
         JMIs[6] = new JMenuItem("Encrypt/Decrypt");
         JMIs[7] = new JMenuItem("Compress");
-        for(int i = 0; i < 8; i++){
+		JMIs[8] = new JMenuItem("Go Back");
+        for(int i = 0; i < 9; i++){
         	JMIs[i].addActionListener(this);
         	jPopupMenu.add(JMIs[i]);            	
         }
@@ -232,7 +232,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			}else{
 				OpenIt(file);				
 			}			
-		}else if (e.getActionCommand().equals("Go Back")) {
+		}else if (e.getSource() == JMIs[8]) {
             Go_Back();
         }
 		

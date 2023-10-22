@@ -8,7 +8,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
-import control.*;
+
+import controller.*;
 import view.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
