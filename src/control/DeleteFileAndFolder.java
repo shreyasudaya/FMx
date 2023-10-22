@@ -36,7 +36,7 @@ public class DeleteFileAndFolder
             } 
             else 
             {
-            	JOptionPane.showMessageDialog(null,fileName,"Deletion Failed",JOptionPane.WARNING_MESSAGE);  
+            	JOptionPane.showMessageDialog(null,fileName,"Deletion Failed",JOptionPane.ERROR_MESSAGE);  
                 return false;
             }
         } 
@@ -76,7 +76,7 @@ public class DeleteFileAndFolder
         }
         if (!flag) 
         {
-        	JOptionPane.showMessageDialog(null,"Deletion failed","Error",JOptionPane.WARNING_MESSAGE);
+        	JOptionPane.showMessageDialog(null,"Deletion failed","Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (dirFile.delete()) {

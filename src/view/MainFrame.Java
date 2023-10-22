@@ -54,6 +54,10 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
+		JButton goBackButton = new JButton("Go Back");
+        goBackButton.setBounds(10, 10, 100, 30); // Adjust the positioning and size as needed
+        goBackButton.addActionListener(this);
+        this.add(goBackButton);
 	}
 	
 	public void Init(){
@@ -202,6 +206,13 @@ public class MainFrame extends JFrame implements ActionListener{
 				Home_List();
 			}
 	}	
+	public void Go_Back() {
+		if (!stack.isEmpty()) {
+			stack_return.push(Curr_URL);
+			Curr_URL = stack.pop();
+			Go_There();
+		}
+	}
 			
 	public static void main(String[] args) {
         MainFrame m = new MainFrame();     
@@ -221,7 +232,9 @@ public class MainFrame extends JFrame implements ActionListener{
 			}else{
 				OpenIt(file);				
 			}			
-		}
+		}else if (e.getActionCommand().equals("Go Back")) {
+            Go_Back();
+        }
 		
 		else if(e.getSource() == JMIs[1]){//Delete
 			File file = new File(Curr_URL + "/" + list.getSelectedValue());
@@ -237,7 +250,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			}			
 		}
 		
-		else if(e.getSource() == delete2){//ɾ��ѹ����
+		else if(e.getSource() == delete2){
 			File file = new File(Curr_URL + "/" + list.getSelectedValue());
 			int n;
 			n = JOptionPane.showConfirmDialog(null, "ARe you sure you want to delete " + file.getName() + " ?", "File Deletion",JOptionPane.YES_NO_OPTION);
@@ -288,7 +301,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			if(!file.exists()){
 				file.mkdir();
 			}
-			JOptionPane.showMessageDialog(null,"Created Successfully","Creation",JOptionPane.WARNING_MESSAGE);  
+			JOptionPane.showMessageDialog(null,"Created Successfully","Creation",JOptionPane.PLAIN_MESSAGE);  
 			Go_There();
 		}
 		
@@ -324,7 +337,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			String dir=Curr_URL + "\\" + list.getSelectedValue();
 			String key = JOptionPane.showInputDialog("Give Password: ");
 			LockAndUnlock.encryptFile(dir, Curr_URL, key);
-			JOptionPane.showMessageDialog(null,"Done","Cryptocrypty",JOptionPane.WARNING_MESSAGE);  
+			JOptionPane.showMessageDialog(null,"Done","Cryptocrypty",JOptionPane.PLAIN_MESSAGE);  
 			Go_There();
 		}
 		
@@ -377,7 +390,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null,"Success","Compression",JOptionPane.WARNING_MESSAGE);  
+			JOptionPane.showMessageDialog(null,"Success","Compression",JOptionPane.PLAIN_MESSAGE);  
 			
 			Go_There();
 		}
