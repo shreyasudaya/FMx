@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -6,10 +6,12 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.util.*;
 
+
+
 public class AccessIcon {
 	public static Icon getSingleIcon(String path)
 	{
-		FileSystemView fview=FileSystemView.getFileSystemView();
+		FileSystemView fview=FileSystemView.getFileSystemView(); 
 		File f= new File(path);
 		Icon i=fview.getSystemIcon(f); 
 		return i;
@@ -24,7 +26,7 @@ public class AccessIcon {
 			List<String> Disks=DirectoryHelp.findDisk();
 			for(int j=0;i<Disks.size();j++)
 			{
-				FileSystemView fsv = FileSystemView.getFileSystemView();
+				FileSystemView fsv = FileSystemView.getFileSystemView(); 
 				File file = new File(Disks.get(j) + "\\"); 
 				icons[i++]=fsv.getSystemIcon(file); 
 			}
@@ -37,7 +39,7 @@ public class AccessIcon {
 			{ 
 				if(a!=null && a.exists()) 
 				{ 
-					FileSystemView fsv= FileSystemView.getFileSystemView();
+					FileSystemView fsv= FileSystemView.getFileSystemView(); 
 					icons[i++]=fsv.getSystemIcon(a);
 				} 
 			} 

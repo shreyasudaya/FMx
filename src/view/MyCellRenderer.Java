@@ -9,10 +9,9 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 
-
 public class MyCellRenderer extends JLabel implements ListCellRenderer {
 	 Icon[] icons;
-	
+
 	public MyCellRenderer() {
 	};
 

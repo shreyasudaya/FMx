@@ -1,7 +1,8 @@
-package controller;
+package control;
 
 import java.io.*;
 import java.util.*;
+
 
 public class AccessFile 
 {

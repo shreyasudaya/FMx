@@ -1,9 +1,8 @@
-package controller;
+package control;
 
 import java.io.File;
 
 import javax.swing.JOptionPane;
-
 
 
 public class DeleteFileAndFolder 
@@ -13,29 +12,26 @@ public class DeleteFileAndFolder
         File file = new File(fileName);
         if (!file.exists()) 
         {
-        	JOptionPane.showMessageDialog(null,fileName+" does not exist.","Deletion failed",JOptionPane.WARNING_MESSAGE);  
+        	JOptionPane.showMessageDialog(null,fileName+" does not exist.","Not found",JOptionPane.WARNING_MESSAGE);  
             return false; 
         } 
         else 
         {
-            if (file.isFile()){
+            if (file.isFile()) 
                 return deleteFile(fileName);
-            }
-            else{
+            else
                 return deleteFolder(fileName);
-            }
-                
         }
     }
 	
-	public static boolean deleteFile(String fileName)
+	public static boolean deleteFile(String fileName)  
 	{
         File file = new File(fileName);
         if (file.exists() && file.isFile())
         {
             if (file.delete())
             {
-            	JOptionPane.showMessageDialog(null,fileName," Deleted Successfully. ",JOptionPane.WARNING_MESSAGE);  
+            	JOptionPane.showMessageDialog(null,fileName,"Deleted successfully",JOptionPane.WARNING_MESSAGE);  
                 return true;
             } 
             else 
@@ -46,7 +42,7 @@ public class DeleteFileAndFolder
         } 
         else
         {
-        	JOptionPane.showMessageDialog(null,fileName +" does not exist. ","Deletion Failed",JOptionPane.WARNING_MESSAGE);
+        	JOptionPane.showMessageDialog(null,fileName +" does not exist","Not Found",JOptionPane.WARNING_MESSAGE);
             return false;
         }
     }
@@ -58,14 +54,14 @@ public class DeleteFileAndFolder
         File dirFile = new File(dir);
         if ((!dirFile.exists()) || (!dirFile.isDirectory()))
         {
-        	JOptionPane.showMessageDialog(null,dir+" does not exist. ", "Deletion Failed",JOptionPane.WARNING_MESSAGE);
+        	JOptionPane.showMessageDialog(null,dir+"does not exist", "Not found",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         boolean flag = true;
         File[] files = dirFile.listFiles();
         for (int i = 0; i < files.length; i++) 
         {
-            if (files[i].isFile()) 
+            if (files[i].isFile())
             {
                 flag = DeleteFileAndFolder.deleteFile(files[i].getAbsolutePath());
                 if (!flag)
@@ -80,11 +76,11 @@ public class DeleteFileAndFolder
         }
         if (!flag) 
         {
-        	JOptionPane.showMessageDialog(null,"Deletion Failed.","Error",JOptionPane.WARNING_MESSAGE);
+        	JOptionPane.showMessageDialog(null,"Deletion failed","Error",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (dirFile.delete()) {
-        	JOptionPane.showMessageDialog(null,dir, "Deleted Successfully",JOptionPane.WARNING_MESSAGE);//最后输出提示
+        	JOptionPane.showMessageDialog(null,"Deleted Successfuly", "Deleted",JOptionPane.WARNING_MESSAGE);//��������ʾ
             return true;
         } 
         else 

@@ -1,30 +1,19 @@
-package controller;
+package control;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
-public class DirectoryHelp 
+
+public class LockAndUnlock
 {
-	public static List<String> findDisk() 
-	{  	  	  
-        List<String> list = new ArrayList<String>(); 
-        for (char c = 'A'; c <= 'Z'; c++) {  
-            String dirName = c + ":";  
-            File win = new File(dirName);  
-            if (win.exists()) {  
-                String str = c + ":";  
-                list.add(str);  
-            }  
-        }  
-        return list;  
-    }  
-    //Encryption
-    public static void encryptFile(String fileDir , String folderDir , String key)
+	/**
+	 * @param fileDir
+	 * @param folderDir
+	 * @param key
+	 */
+	public static void encryptFile(String fileDir , String folderDir , String key)
 	{
         FileInputStream in = null;
         FileOutputStream out = null; 
@@ -38,6 +27,7 @@ public class DirectoryHelp
             out = new FileOutputStream(targetFileUrl);
             int data = 0;
             while ((data=in.read())!=-1){
+             
                 out.write(data^keyword); 
             }
         }catch (Exception e){
@@ -61,4 +51,5 @@ public class DirectoryHelp
         file.delete();
         desfile.renameTo(new File(fileDir));
 	}
+
 }

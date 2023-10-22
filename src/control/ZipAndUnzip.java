@@ -1,34 +1,24 @@
 package control;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.zip.ZipOutputStream;
-
+import java.util.zip.ZipEntry;
 import javax.swing.JOptionPane;
 
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 public class ZipAndUnzip {
-	private static int BUFFERSIZE = 2 << 10; 
-	private static String basePath;
+
 	public static void zipDirectory(String path) throws IOException {
         File file = new File(path);
         String parent = file.getParent();
         File zipFile = new File(parent, file.getName() + ".zip");
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile));
         zip(zos, file, file.getName());
-        JOptionPane.showMessageDialog(null,"Compression successful","Success",JOptionPane.WARNING_MESSAGE);  
+        JOptionPane.showMessageDialog(null,"Compression Successful","Success",JOptionPane.WARNING_MESSAGE);  
         zos.flush();
         zos.close();
     }
@@ -59,8 +49,7 @@ public class ZipAndUnzip {
 	
 	public static void unzip(String fileName, String path)  
     {  
-        FileOutputStream fos = null;  
-        InputStream is = null;  
+         
         JOptionPane.showMessageDialog(null,"Extraction Successful","Success",JOptionPane.WARNING_MESSAGE);  
     }
 }
