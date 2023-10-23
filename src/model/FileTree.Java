@@ -151,7 +151,7 @@ public class FileTree extends JPanel {
         		   if(temp_file.isDirectory()){
         			   MainFrame._instance.stack.push(MainFrame._instance.Curr_URL);
         			   MainFrame._instance.Curr_URL = chooseUrl;        			 
-        			   MainFrame._instance.Go_There();        			   
+        			   MainFrame._instance.Go();        			   
         		   }
         	   }
         });    

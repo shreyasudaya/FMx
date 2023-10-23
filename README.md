@@ -8,3 +8,22 @@ There may be issue as I developed this on VScode. If so then configure .vscode t
 
 
 Have to implement navigating backwards which till now was done by drop down menu on the left.
+
+Steps for deploying.
+
+1. Clone the repository given. ```git clone https://github.com/shreyasudaya/FMx```
+2. Navigate to said repository.
+3. Make sure you have java installed.
+4. Now in terminal, copy paste following command:
+   ```
+   d:; cd 'd:{Location of the repo you cloned}'; & '{Location of your C:/Java}\jdk-21\bin\java.exe' '-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=localhost:63640' '-XX:+ShowCodeDetailsInExceptionMessages' '-cp' '{Location you cloned}/bin' 'view.MainFrame'
+   ```
+5. Another way to do using VS Code:
+    1. Install extensions on VS code for Java and Java Project Manager.
+    2. Open New VS Code Window.
+    3. Click Explorer at top left or to ```Ctrl+Shift+E```
+    4. Select Create Java Project
+    5. Copy the src folder, along with .classpath and .project files to the new Project.
+    6. Go down to Java Projects and click on the Run and Debug option given.
+
+
