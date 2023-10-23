@@ -22,6 +22,17 @@ public class MainFrame extends JFrame implements ActionListener{
     JScrollPane ScrollShow,TreeShow;
     DefaultMutableTreeNode node;
     public String Curr_URL="";
+	/*static JMenuBar menu;
+    static JMenu x;
+    static JMenuItem m1, m2, m3;
+	x = new JMenu("Menu");
+
+	m1 = new JMenuItem("Go Back");
+    m2 = new JMenuItem("MenuItem2");
+    m3 = new JMenuItem("MenuItem3");*/
+ 
+    // create a frame
+    static JFrame f;
     public Map<String,String> Maps=new HashMap<String,String>();
     JList<String> list;
     public DefaultListModel defaultListModel;
@@ -79,11 +90,10 @@ public class MainFrame extends JFrame implements ActionListener{
         JMI1[3] = new JMenuItem("Paste");
         JMI1[4] = new JMenuItem("Delete");
         JMI1[5] = new JMenuItem("Rename");
-        JMI1[6] = new JMenuItem("encrypt/decrypt");
-        JMI1[7] = new JMenuItem("Compress");
-		JMI1[8] = new JMenuItem("Go Back");
+        JMI1[6] = new JMenuItem("Compress");
+		JMI1[7] = new JMenuItem("Go Back");
 
-        for(int i = 0; i < 9; i++){
+        for(int i = 0; i < 8; i++){
         	JMI1[i].addActionListener(this);
         	jPopupMenu1.add(JMI1[i]);            	
         }
@@ -224,7 +234,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			}else{
 				Open(file);				
 			}
-        }else if(e.getSource()==JMI1[8]){
+        }else if(e.getSource()==JMI1[7]){
 			Go_Back();
 		}else if(e.getSource()==JMI1[1]){//New folder
             String name = JOptionPane.showInputDialog("Give name: ");
@@ -307,14 +317,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			}else{
 				Go();
 			}
-        }else if(e.getSource()==JMI1[6]){//Encrypt/decrypt
-            String dir=Curr_URL + "\\" + list.getSelectedValue();
-			String key = JOptionPane.showInputDialog("Enter the password ");
-			LockAndUnlock.encryptFile(dir, Curr_URL, key);
-			JOptionPane.showMessageDialog(null,"Done successfully","File Protection",JOptionPane.WARNING_MESSAGE);
-
-			Go();
-        }else if(e.getSource()==JMI1[7]){//compress
+        }else if(e.getSource()==JMI1[6]){//compress
             String dir=Curr_URL + "\\" + list.getSelectedValue();
 			try {
 				ZipAndUnzip.zipDirectory(dir);

@@ -28,3 +28,7 @@ Steps for deploying.
     6. Go down to Java Projects and click on the Run and Debug option given.
 
 
+Output is in output folder. You should get.
+
+Yet to impelement: JMenuBar
+
