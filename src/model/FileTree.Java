@@ -71,7 +71,7 @@ public class FileTree extends JPanel {
         private File[] children;
         private TreeNode parent;
         private boolean isFileSystemRoot;
-
+        
         public FileTreeNode(File file, boolean isFileSystemRoot, TreeNode parent) {
             this.file = file;
             this.isFileSystemRoot = isFileSystemRoot;

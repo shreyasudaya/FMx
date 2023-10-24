@@ -1,10 +1,13 @@
 package view;
 
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -19,10 +22,20 @@ import model.*;
 public class MainFrame extends JFrame implements ActionListener {
 	public static MainFrame _instance;
 	JPanel ShowPanel, TreePanel;
+	JMenuBar Menu;
+	JMenu lArrow;
+	
 	FileTree filesTree;
 	JScrollPane ScrollShow, TreeShow;
 	DefaultMutableTreeNode node;
 	public String Curr_URL = "";
+	JPanel fileMainDetails,flags;
+	JPanel fileDetailsLabels;
+	JPanel fileDetailsValues;
+
+	JTextField path;
+	JLabel fileName,date,size;
+	JRadioButton isDirectory,isFile;
 	/*
 	 * static JMenuBar menu;
 	 * static JMenu x;
@@ -44,6 +57,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	JPopupMenu jPopupMenu2 = null;
 	JPopupMenu jPopupMenu3 = null;
 	JPopupMenu jPopupMenu4 = null;
+	JMenuItem[] Men2 = new JMenuItem[3];
 	JMenuItem[] JMI1 = new JMenuItem[10];
 	JMenuItem[] JMI2 = new JMenuItem[5];
 	JMenuItem delete1 = new JMenuItem("Delete");
@@ -68,17 +82,57 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void Init() {
 		ShowPanel = new JPanel();
 		TreePanel = new JPanel();
-
+		Menu = new JMenuBar();
+		lArrow = new JMenu("Menu");
 		stack = new Stack<String>();
 		stack_return = new Stack<String>();
 		ShowPanel.setSize(800, 600);
 		ShowPanel.setLocation(195, 10);
-		ShowPanel.setLayout(null);
+		ShowPanel.setLayout(new BorderLayout());
+		ShowPanel.add(Menu, BorderLayout.NORTH);
 
 		list = new JList<String>();
 
 		jPopupMenu1 = new JPopupMenu();
 		jPopupMenu2 = new JPopupMenu();
+
+
+		fileMainDetails = new JPanel(new BorderLayout(4, 2));
+		
+		fileMainDetails.setLayout(new BorderLayout());
+		fileDetailsLabels = new JPanel(new GridLayout(0, 1, 2, 2));
+		fileMainDetails.add(fileDetailsLabels, BorderLayout.WEST);
+		fileDetailsValues = new JPanel(new GridLayout(0, 1, 2, 2));
+        fileMainDetails.add(fileDetailsValues, BorderLayout.CENTER);
+		fileDetailsLabels.add(new JLabel("File", JLabel.TRAILING));
+		fileName = new JLabel();
+        fileDetailsValues.add(fileName);
+        fileDetailsLabels.add(new JLabel("Path/name", JLabel.TRAILING));
+        path = new JTextField(5);
+        path.setEditable(false);
+        fileDetailsValues.add(path);
+        fileDetailsLabels.add(new JLabel("Last Modified", JLabel.TRAILING));
+        date = new JLabel();
+        fileDetailsValues.add(date);
+        fileDetailsLabels.add(new JLabel("File size", JLabel.TRAILING));
+        size = new JLabel();
+        fileDetailsValues.add(size);
+        fileDetailsLabels.add(new JLabel("Type", JLabel.TRAILING));
+		flags = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 0));
+        isDirectory = new JRadioButton("Directory");
+        isDirectory.setEnabled(false);
+        flags.add(isDirectory);
+
+        isFile = new JRadioButton("File");
+        isFile.setEnabled(false);
+        flags.add(isFile);
+        fileDetailsValues.add(flags);
+
+        int count = fileDetailsLabels.getComponentCount();
+        for (int i = 0; i < count; i++) {
+            fileDetailsLabels.getComponent(i).setEnabled(false);
+        }
+		
 		/*
 		 * VVV important pls refer and pls see so no forget
 		 * wfwwedwedwedwedwedwedwdedwd
@@ -95,11 +149,19 @@ public class MainFrame extends JFrame implements ActionListener {
 		JMI1[4] = new JMenuItem("Delete");
 		JMI1[5] = new JMenuItem("Rename");
 		JMI1[6] = new JMenuItem("Compress");
-		JMI1[7] = new JMenuItem("Go Back");
+		JMI1[7] = new JMenuItem("Show Properties");
+		// Menu sdferfererc
+		Men2[0] = new JMenuItem("Go Back");
+		Men2[1] = new JMenuItem("New");
+		Men2[2] = new JMenuItem("Get Path");
 
 		for (int i = 0; i < 8; i++) {
 			JMI1[i].addActionListener(this);
 			jPopupMenu1.add(JMI1[i]);
+		}
+		for (int i = 0; i < 3; i++) {
+			Men2[i].addActionListener(this);
+			lArrow.add(Men2[i]);
 		}
 		JMI2[0] = new JMenuItem("Open");
 		JMI2[0].addActionListener(this);
@@ -121,6 +183,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		list.add(jPopupMenu3);
 		list.add(jPopupMenu2);
 		list.add(jPopupMenu1);
+		list.add(fileMainDetails);
 
 		Home_List();
 		list.addMouseListener(new MouseAdapter() {
@@ -148,6 +211,48 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 			}
 		});
+
+		/*
+		 *  // details for a File
+            JPanel fileMainDetails = new JPanel(new BorderLayout(4, 2));
+            fileMainDetails.setBorder(new EmptyBorder(0, 6, 0, 6));
+
+            JPanel fileDetailsLabels = new JPanel(new GridLayout(0, 1, 2, 2));
+            fileMainDetails.add(fileDetailsLabels, BorderLayout.WEST);
+
+            JPanel fileDetailsValues = new JPanel(new GridLayout(0, 1, 2, 2));
+            fileMainDetails.add(fileDetailsValues, BorderLayout.CENTER);
+
+            fileDetailsLabels.add(new JLabel("File", JLabel.TRAILING));
+            fileName = new JLabel();
+            fileDetailsValues.add(fileName);
+            fileDetailsLabels.add(new JLabel("Path/name", JLabel.TRAILING));
+            path = new JTextField(5);
+            path.setEditable(false);
+            fileDetailsValues.add(path);
+            fileDetailsLabels.add(new JLabel("Last Modified", JLabel.TRAILING));
+            date = new JLabel();
+            fileDetailsValues.add(date);
+            fileDetailsLabels.add(new JLabel("File size", JLabel.TRAILING));
+            size = new JLabel();
+            fileDetailsValues.add(size);
+            fileDetailsLabels.add(new JLabel("Type", JLabel.TRAILING));
+
+            JPanel flags = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 0));
+            isDirectory = new JRadioButton("Directory");
+            isDirectory.setEnabled(false);
+            flags.add(isDirectory);
+
+            isFile = new JRadioButton("File");
+            isFile.setEnabled(false);
+            flags.add(isFile);
+            fileDetailsValues.add(flags);
+
+            int count = fileDetailsLabels.getComponentCount();
+            for (int ii = 0; ii < count; ii++) {
+                fileDetailsLabels.getComponent(ii).setEnabled(false);
+            }
+		 */
 		ScrollShow = new JScrollPane(list);
 		ShowPanel.add(ScrollShow);
 		ScrollShow.setSize(790, 520);
@@ -161,6 +266,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		TreeShow.setBounds(5, 5, 185, 520);
 		TreePanel.add(TreeShow);
 		this.add(TreePanel);
+		Menu.add(lArrow);
+
+		this.setJMenuBar(Menu);
 	}
 
 	public void doubleClick(String choice) {
@@ -237,8 +345,27 @@ public class MainFrame extends JFrame implements ActionListener {
 			} else {
 				Open(file);
 			}
-		} else if (e.getSource() == JMI1[7]) {
+		} else if (e.getSource() == Men2[0]) {
 			Go_Back();
+		} else if (e.getSource() == Men2[1]) {
+			String name = JOptionPane.showInputDialog("Give name: ");
+			String newdir = Curr_URL + "\\" + name;
+			File file = new File(newdir);
+			if (!file.exists()) {
+				file.mkdir();
+			}
+			JOptionPane.showMessageDialog(null, "Created Successfully", "Created Successfully",
+					JOptionPane.WARNING_MESSAGE);
+			Go();
+		} else if (e.getSource() == Men2[2]) {
+			StringSelection strselect = new StringSelection(Curr_URL);
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			clipboard.setContents(strselect, null);
+			JOptionPane.showMessageDialog(null, "Path copied to clipboard", "Created Successfully",
+					JOptionPane.PLAIN_MESSAGE);
+			Go();
+		} else if (e.getSource() == JMI1[7]) {
+			fileMainDetails.setVisible(true);
 		} else if (e.getSource() == JMI1[1]) {// New folder
 			String name = JOptionPane.showInputDialog("Give name: ");
 			String newdir = Curr_URL + "\\" + name;
