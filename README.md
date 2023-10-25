@@ -30,5 +30,7 @@ Steps for deploying.
 
 Output is in output folder. You should get.
 
-Yet to impelement: JMenuBar
+Yet to impelement: Properties section
+
+Drive link to demo: https://drive.google.com/file/d/1NU7WstyHMnTLJwXkiFLJgWzuflj4eCIE/view?usp=sharing
 
